@@ -74,7 +74,11 @@ class TestRunner
 	{
 		try
 		{
+			runBeforeTest(instance);
+			
 			Reflect.callMethod(instance, Reflect.field(instance, testName), []);
+			
+			runAfterTest(instance);
 		}
 		catch (exception:Dynamic)
 		{
@@ -85,6 +89,24 @@ class TestRunner
 		logger.logPass("+ Test passed: " + testName);
 		
 		return true;
+	}
+	
+	function runBeforeTest(instance:BaseTest):Void
+	{
+		var beforeEach:Void->Void = cast Reflect.field(instance, "beforeEach");
+		if (beforeEach != null)
+		{
+			Reflect.callMethod(instance, beforeEach, []); 
+		}
+	}
+	
+	function runAfterTest(instance:BaseTest):Void
+	{
+		var afterEach:Void->Void = cast Reflect.field(instance, "afterEach");
+		if (afterEach != null)
+		{
+			Reflect.callMethod(instance, afterEach, []); 
+		}
 	}
 	
 	function testsComplete():Void
