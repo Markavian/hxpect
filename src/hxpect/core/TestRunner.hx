@@ -78,7 +78,7 @@ class TestRunner
 		}
 		catch (exception:Dynamic)
 		{
-			logger.logPass("- Test failed: " + testName + ", reason: " + exception);
+			logger.logFail("- Test failed: " + testName + ", reason: " + exception);
 			return false;
 		}
 		

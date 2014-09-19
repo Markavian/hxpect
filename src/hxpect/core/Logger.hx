@@ -2,15 +2,29 @@ package hxpect.core;
 
 class Logger
 {
-	static inline var TEXT_PASS:String = "\033[32m";
-	static inline var TEXT_INFO:String = "\033[36m";
-	static inline var TEXT_WARNING:String = "\033[33m";
-	static inline var TEXT_FAIL:String = "\033[31m";
-	static inline var TEXT_RESET:String = "\033[0m";
+	public static inline var TEXT_PASS:String = "\033[32m";
+	public static inline var TEXT_INFO:String = "\033[36m";
+	public static inline var TEXT_WARNING:String = "\033[33m";
+	public static inline var TEXT_FAIL:String = "\033[31m";
+	public static inline var TEXT_RESET:String = "\033[0m";
+	
+	var logFunction:String->Void;
+	var operatingSystem:String;
 	
 	public function new()
 	{
-		
+		logFunction = Sys.println;
+		operatingSystem = Sys.systemName();
+	}
+	
+	public function setLogger(logFunction:String->Void):Void
+	{
+		this.logFunction = logFunction;
+	}
+	
+	public function setOperatingSystem(operatingSystem:String):Void
+	{
+		this.operatingSystem = operatingSystem;
 	}
 	
 	public function logPass(message:String):Void
@@ -35,7 +49,7 @@ class Logger
 	
 	public function logColor(message:String, textColor:String):Void
 	{
-		if (Sys.systemName() == "Windows")
+		if (this.operatingSystem == "Windows")
 		{
 			log(message);
 		}
@@ -52,7 +66,7 @@ class Logger
 	
 	public function log(message:String)
 	{
-		Sys.println(message);
+		logFunction(message);
 	}
 	
 }

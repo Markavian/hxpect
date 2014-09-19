@@ -11,6 +11,7 @@ class Main
 		testRunner.registerTestClass(AssertTests);
 		testRunner.registerTestClass(BaseTestTests);
 		testRunner.registerTestClass(ExpectAssertionTests);
+		testRunner.registerTestClass(LoggerTests);
 		testRunner.run();
 		
 		return testRunner.failiures();
