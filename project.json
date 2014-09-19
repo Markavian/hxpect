@@ -1,0 +1,15 @@
+{
+  "name": "hxpect",
+  "url" :
+      "https://github.com/Markavian/hxpect",
+  "license": "Public",
+  "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
+  "description":
+      "Haxe based test framework for writing tests in a more natural language kind of way.",
+  "version": "0.0.1",
+  "releasenote":
+      "Empty project, populating project.",
+  "contributors": ["John Beech", "Markavian"],
+  "dependencies": {
+  }
+}
