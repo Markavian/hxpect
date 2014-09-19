@@ -2,12 +2,7 @@ package hxpect.core;
 
 class TestRunner
 {
-	static inline var TEXT_PASS:String = "\033[32m";
-	static inline var TEXT_INFO:String = "\033[36m";
-	static inline var TEXT_WARNING:String = "\033[33m";
-	static inline var TEXT_FAIL:String = "\033[31m";
-	static inline var TEXT_RESET:String = "\033[0m";
-	
+	private var logger:Logger;
 	private var registeredTests:Array<Dynamic>;
 	
 	private var totalTestCount:Int = 0;
@@ -16,6 +11,8 @@ class TestRunner
 	public function new()
 	{
 		// e.g. registerTestClass(CheckoutTest);
+		
+		logger = new Logger();
 	}
 	
 	public function registerTestClass(testClass:Class<Dynamic>):Void
@@ -42,8 +39,8 @@ class TestRunner
 	
 	function beginTests():Void
 	{
-		logInfo("Hxpect Test Runner - tests initialised");
-		logInfo("Operating system: " + Sys.systemName());
+		logger.logInfo("Hxpect Test Runner - tests initialised");
+		logger.logInfo("Operating system: " + Sys.systemName());
 	}
 	
 	function runTestsOn(testClass:Class<Dynamic>):Void
@@ -51,8 +48,8 @@ class TestRunner
 		var tests = Type.getInstanceFields(testClass);
 		var instance:BaseTest = Type.createEmptyInstance(testClass);
 		
-		log("");
-		log("Running tests on " + Type.getClassName(testClass));
+		logger.logEmptyLine();
+		logger.log("Running tests on " + Type.getClassName(testClass));
 		var classTestCount:Int = 0;
 		var classSuccessCount:Int = 0;
 		for (testName in tests)
@@ -67,7 +64,7 @@ class TestRunner
 				}
 			}
 		}
-		log("Tests passed: " + classSuccessCount + "/" + classTestCount);
+		logger.log("Tests passed: " + classSuccessCount + "/" + classTestCount);
 		
 		totalTestCount += classTestCount;
 		totalSuccessCount += classSuccessCount;
@@ -81,64 +78,27 @@ class TestRunner
 		}
 		catch (exception:Dynamic)
 		{
-			logPass("- Test failed: " + testName + ", reason: " + exception);
+			logger.logPass("- Test failed: " + testName + ", reason: " + exception);
 			return false;
 		}
 		
-		logPass("+ Test passed: " + testName);
+		logger.logPass("+ Test passed: " + testName);
 		
 		return true;
 	}
 	
 	function testsComplete():Void
 	{
-		log("");
-		logInfo("Total tests passed: " + totalSuccessCount + "/" + totalTestCount);
+		logger.logEmptyLine();
+		logger.logInfo("Total tests passed: " + totalSuccessCount + "/" + totalTestCount);
 		if (totalSuccessCount == totalTestCount)
 		{
-			logPass("SUCCESS");
+			logger.logPass("SUCCESS");
 		}
 		else
 		{
-			logFail("FAILIURE");
+			logger.logFail("FAILIURE");
 		}
-	}
-	
-	function logPass(message:String)
-	{
-		logColor(message, TEXT_PASS);
-	}
-	
-	function logFail(message:String)
-	{
-		logColor(message, TEXT_FAIL);
-	}
-	
-	function logWarning(message:String)
-	{
-		logColor(message, TEXT_WARNING);
-	}
-	
-	function logInfo(message:String)
-	{
-		logColor(message, TEXT_INFO);
-	}
-	
-	function logColor(message:String, textColor:String)
-	{
-		if (Sys.systemName() == "Windows")
-		{
-			log(message);
-		}
-		else
-		{
-			log(textColor + message + TEXT_RESET);
-		}
-	}
-	
-	function log(message:String)
-	{
-		Sys.println(message);
 	}
 	
 	public function failiures():Int
