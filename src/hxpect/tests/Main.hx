@@ -10,6 +10,7 @@ class Main
 		var testRunner = new TestRunner();
 		testRunner.registerTestClass(AssertTests);
 		testRunner.registerTestClass(BaseTestTests);
+		testRunner.registerTestClass(ExpectAssertionTests);
 		testRunner.run();
 		
 		return testRunner.failiures();
