@@ -7,7 +7,7 @@
       "Haxe based test framework for writing tests in a more natural language kind of way.",
   "version": "0.0.3",
   "releasenote":
-      "Updated readme to include information about project.",
+      "Updated readme.md to include better information about project.",
   "contributors": ["Markavian"],
   "dependencies": {
   }
