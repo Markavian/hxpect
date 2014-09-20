@@ -1,4 +1,5 @@
 package hxpect.core;
+import haxe.Log;
 
 class Logger
 {
@@ -13,13 +14,26 @@ class Logger
 	
 	public function new()
 	{
-		logFunction = Sys.println;
-		operatingSystem = Sys.systemName();
+		#if (php || neko || cpp)
+			logFunction = Sys.println;
+			operatingSystem = Sys.systemName();
+		#elseif flash
+			logFunction = function(message) { Log.trace(message); };
+			operatingSystem = "Flash";
+		#else
+			logFunction = function(message) { Log.trace(message); };
+			operatingSystem = "Uknown";
+		#end
 	}
 	
 	public function setLogger(logFunction:String->Void):Void
 	{
 		this.logFunction = logFunction;
+	}
+	
+	public function systemName():String
+	{
+		return this.operatingSystem;
 	}
 	
 	public function setOperatingSystem(operatingSystem:String):Void
@@ -49,7 +63,7 @@ class Logger
 	
 	public function logColor(message:String, textColor:String):Void
 	{
-		if (this.operatingSystem == "Windows")
+		if (this.operatingSystem == "Windows" || this.operatingSystem == "Flash")
 		{
 			log(message);
 		}

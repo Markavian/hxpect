@@ -40,7 +40,7 @@ class TestRunner
 	function beginTests():Void
 	{
 		logger.logInfo("Hxpect Test Runner - tests initialised");
-		logger.logInfo("Operating system: " + Sys.systemName());
+		logger.logInfo("Operating system: " + logger.systemName());
 	}
 	
 	function runTestsOn(testClass:Class<Dynamic>):Void

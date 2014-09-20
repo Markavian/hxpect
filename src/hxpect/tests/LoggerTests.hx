@@ -37,7 +37,19 @@ class LoggerTests extends BaseTest
 		expect(actual).to.be(expected);
 	}
 	
-	public function test_logColor_onNonWindows()
+	public function test_logColor_onFlash()
+	{
+		var color = "BLUE";
+		var message = "Another message";
+		var expected = message;
+		
+		logger.setOperatingSystem("Flash");
+		logger.logColor(message, color);
+		
+		expect(actual).to.be(expected);
+	}
+	
+	public function test_logColor_onOtherOperatingSytems()
 	{
 		var color = "RED";
 		var reset = Logger.TEXT_RESET;
