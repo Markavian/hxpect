@@ -5,9 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "releasenote":
-      "Working set of tests, ready for inclusion in an external project.",
+      "Updated readme to include information about project.",
   "contributors": ["Markavian"],
   "dependencies": {
   }
