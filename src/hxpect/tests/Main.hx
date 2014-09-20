@@ -1,7 +1,6 @@
 package hxpect.tests;
 
 import hxpect.core.TestRunner;
-import neko.Lib;
 
 class Main 
 {
@@ -14,7 +13,8 @@ class Main
 		testRunner.registerTestClass(LoggerTests);
 		testRunner.run();
 		
-		return testRunner.failiures();
+		var successful = (testRunner.failiures() == 0);
+		
+		Sys.exit(successful ? 0 : 1);
 	}
-	
 }
