@@ -49,10 +49,4 @@ class LoggerTests extends BaseTest
 		
 		expect(actual).to.be(expected);
 	}
-	
-	public function test_shouldFail()
-	{
-		// temporary test to check that CI correctly fails
-		expect(true).to.be(false);
-	}
 }
