@@ -38,6 +38,69 @@ class ExpectAssertion
 		}
 	}
 	
+	public function throwException(?exception:Dynamic):Void
+	{
+		var runBlock = actualValue;
+		
+		if (negativeFlag)
+		{
+			testForNoException(runBlock, exception);
+		}
+		else
+		{
+			testForException(runBlock, exception);
+		}
+	}
+	
+	function testForNoException(runBlock:Void->Dynamic, unexpectedException:Dynamic)
+	{
+		try
+		{
+			runBlock();
+		}
+		catch (exception:Dynamic)
+		{
+			if (exception == unexpectedException)
+			{
+				throw "Method incorrectly threw the unexpected exception: " + exception;
+			}
+			else if (unexpectedException == null)
+			{
+				throw "Method unexpectedly threw an exception: " + exception;
+			}
+		}
+	}
+	
+	function testForException(runBlock:Void->Dynamic, expectedException:Dynamic)
+	{
+		var testPassed:Bool = false;
+		
+		try
+		{
+			runBlock();
+		}
+		catch (exception:Dynamic)
+		{
+			if (exception == expectedException)
+			{
+				testPassed = true;
+			}
+			else if (expectedException == null)
+			{
+				testPassed = true;
+			}
+			else
+			{
+				throw "Method threw unexpected exception: " + exception;
+			}
+		}
+		
+		if (!testPassed)
+		{
+			throw "Method failed to throw any exception.";
+		}
+	}
+	
 	public function get_not():ExpectAssertion
 	{
 		negativeFlag = true;

@@ -89,4 +89,79 @@ class ExpectAssertionTests extends BaseTest
 			expect(actual).to.beNull();
 		}, "Actual value " + actual + " should be null");
 	}
+	
+	public function test_expectToThrowException_shouldCatchAnyException():Void
+	{
+		var expected = "Some exception";
+		var testMethod = function():Void {
+			throw expected;
+		}
+		
+		expect(testMethod).to.throwException();
+	}
+	
+	public function test_expectToThrowException_shouldCatchException():Void
+	{
+		var expected = "Some exception";
+		var testMethod = function():Void {
+			throw expected;
+		}
+		
+		expect(testMethod).to.throwException(expected);
+	}
+	
+	public function test_expectToNotThrowException_shouldCatchAnyException():Void
+	{
+		var expected = "Another exception";
+		var testMethod = function():Void {
+			throw expected;
+		}
+		
+		try 
+		{
+			expect(testMethod).to.not.throwException();
+		}
+		catch (exception:Dynamic)
+		{
+			Assert.assertEqual(exception, "Method unexpectedly threw an exception: " + expected);
+		}
+	}
+	
+	public function test_expectToNotThrowException_shouldCatchASpecificException():Void
+	{
+		var expected = "Specific exception";
+		var testMethod = function():Void
+		{
+			throw expected;
+		}
+		
+		try 
+		{
+			expect(testMethod).to.not.throwException(expected);
+		}
+		catch (exception:Dynamic)
+		{
+			Assert.assertEqual(exception, "Method incorrectly threw the unexpected exception: " + expected);
+		}
+	}
+	
+	public function test_expectToNotThrowException_shouldIgnoreExceptionsThatDontMatch():Void
+	{
+		var expected = "Specific exception";
+		var testMethod = function():Void
+		{
+			throw "Ignorable exception";
+		}
+		
+		expect(testMethod).to.not.throwException(expected);
+		
+		try
+		{
+			expect(testMethod).to.not.throwException();
+		}
+		catch (exception:Dynamic)
+		{
+			Assert.assertEqual(exception, "Method unexpectedly threw an exception: Ignorable exception");
+		}
+	}
 }

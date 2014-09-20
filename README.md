@@ -36,7 +36,7 @@ Hxpect allows tests to be written in the form:
 ### Example
 
 An example test class
-	
+
 	class ProjectTests extends BaseTest 
 	{
 		var thingUnderTest:SomeType;
