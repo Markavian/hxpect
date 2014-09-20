@@ -21,7 +21,7 @@ Features
 
 ### Cross Platform
 
-Hxpect should work with any haxe project, specifically for OpenFL projects - see http://www.openfl.org
+Hxpect should work with any haxe project, although specifically it was designed for [OpenFL projects](http://www.openfl.org). 
 
 ### Expectations
 
@@ -45,7 +45,6 @@ An example test class
 			thingUnderTest = new SomeType();
 		}
 		
-		
 		public function test_myTest():Void
 		{
 			var expected = "expected result";
@@ -63,7 +62,6 @@ Underlying the fluid expect calls are basic assertions that will throw exception
 	Assert.isFalse(value);
 	Assert.isNull(value);
 	Assert.isNotNull(value)
-	
 
 ### Test Runner
 
