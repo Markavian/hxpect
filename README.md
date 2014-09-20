@@ -96,8 +96,7 @@ Currently tests are recognised from each class if they begin with "test_". Tests
 The above program can be compiled and run with the command:
 	
 	haxe  -cp ../src -neko ../bin/HxpectTests.n -main "hxpect.tests.Main"
-	cd bin
-	neko HxpectTests.n
+	neko bin/HxpectTests.n
 	
 Plans for future
 ----------------
