@@ -1,7 +1,6 @@
 {
   "name": "hxpect",
-  "url" :
-      "https://github.com/Markavian/hxpect",
+  "url" : "https://github.com/Markavian/hxpect",
   "license": "Public",
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
