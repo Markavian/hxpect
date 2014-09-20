@@ -30,10 +30,11 @@ Hxpect allows tests to be written in the form:
 	expect(actual).to.be(expected);
 	expect(actual).to.not.be(expected);
 
-	expect(method).to.throwException()
-	expect(method).to.throwException(exception)
-	expect(method).to.not.throwException()
-	expect(method).to.not.throwException(specificException)
+	expect(method).to.throwException();
+	expect(method).to.throwException(specificException);
+	
+	expect(method).to.not.throwException();
+	expect(method).to.not.throwException(specificException);
 	
 ### Example
 
