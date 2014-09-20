@@ -24,9 +24,9 @@ class ExpectAssertionTests extends BaseTest
 	
 	public function test_expectToBe_shouldWork():Void
 	{
-		expectNoExceptions(function() {
+		expect(function() {
 			expect(20).to.be(20);
-		});
+		}).to.not.throwException();
 	}
 	
 	public function test_expectToBe_shouldThrowAnException():Void
@@ -34,24 +34,24 @@ class ExpectAssertionTests extends BaseTest
 		var actual = 10;
 		var expected = 20;
 		
-		expectException(function() {
+		expect(function() {
 			expect(actual).to.be(expected);
-		}, "Actual value " + actual + " should equal expected value " + expected);
+		}).to.throwException("Actual value " + actual + " should equal expected value " + expected);
 	}
 	
 	public function test_expectToNotBe_shouldWork():Void
 	{
-		expectNoExceptions(function() {
+		expect(function() {
 			expect(10).to.not.be(20);
-		});
+		}).to.not.throwException();
 		
-		expectNoExceptions(function() {
+		expect(function() {
 			expect(10).not.be(20);
-		});
+		}).to.not.throwException();
 		
-		expectNoExceptions(function() {
+		expect(function() {
 			expect(10).not.to.be(20);
-		});
+		}).to.not.throwException();
 	}
 	
 	public function test_expectToNotBe_shouldThrowAnException():Void
@@ -59,35 +59,35 @@ class ExpectAssertionTests extends BaseTest
 		var expected = 10;
 		var actual = expected;
 		
-		expectException(function() {
+		expect(function() {
 			expect(expected).to.not.be(actual);
-		}, "Actual value " + actual + " should not equal expected value " + expected);
+		}).to.throwException("Actual value " + actual + " should not equal expected value " + expected);
 		
-		expectException(function() {
+		expect(function() {
 			expect(expected).not.be(actual);
-		}, "Actual value " + actual + " should not equal expected value " + expected);
+		}).to.throwException("Actual value " + actual + " should not equal expected value " + expected);
 		
-		expectException(function() {
+		expect(function() {
 			expect(expected).not.to.be(actual);
-		}, "Actual value " + actual + " should not equal expected value " + expected);
+		}).to.throwException("Actual value " + actual + " should not equal expected value " + expected);
 	}
 	
 	public function test_expectToBeNull_shouldWork():Void
 	{
 		var actual = null;
 		
-		expectNoExceptions(function() {
+		expect(function() {
 			expect(actual).to.beNull();
-		});
+		}).to.not.throwException();
 	}
 	
 	public function test_expectToBeNull_shouldThrowAnException():Void
 	{
 		var actual = "not null";
 		
-		expectException(function() {
+		expect(function() {
 			expect(actual).to.beNull();
-		}, "Actual value " + actual + " should be null");
+		}).to.throwException("Actual value " + actual + " should be null");
 	}
 	
 	public function test_expectToThrowException_shouldCatchAnyException():Void

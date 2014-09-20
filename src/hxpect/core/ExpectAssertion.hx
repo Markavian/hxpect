@@ -101,13 +101,13 @@ class ExpectAssertion
 		}
 	}
 	
-	public function get_not():ExpectAssertion
+	function get_not():ExpectAssertion
 	{
 		negativeFlag = true;
 		return this;
 	}
 	
-	public function get_to():ExpectAssertion
+	function get_to():ExpectAssertion
 	{
 		return this;
 	}
