@@ -29,9 +29,11 @@ Hxpect allows tests to be written in the form:
 	
 	expect(actual).to.be(expected);
 	expect(actual).to.not.be(expected);
-	
-	expectNoExceptions(methodUnderTest)
-	expectException(methodUnderTest, "Value out of bounds exception")
+
+	expect(method).to.throwException()
+	expect(method).to.throwException(exception)
+	expect(method).to.not.throwException()
+	expect(method).to.not.throwException(specificException)
 	
 ### Example
 
@@ -60,6 +62,10 @@ Underlying the fluid expect calls are basic assertions that will throw exception
 	
 	Assert.isTrue(value);
 	Assert.isFalse(value);
+	
+	Assert.isEqual(expected, actual);
+	Assert.isNotEqual(expected, actual);
+	
 	Assert.isNull(value);
 	Assert.isNotNull(value)
 
