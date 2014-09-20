@@ -5,9 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.0.5",
+  "version": "0.0.56",
   "releasenote":
-      "Changed build process to pack up src/ directory as root so it can correctly be included into external projects.",
+      "Updated hxpect to work under Flash build targets.",
   "contributors": ["Markavian"],
   "dependencies": {
   }
