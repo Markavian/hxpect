@@ -7,7 +7,7 @@
       "Haxe based test framework for writing tests in a more natural language kind of way.",
   "version": "0.1.0",
   "releasenote":
-      "Updated hxpect to work under Flash build targets.",
+      "Screwed up version numbers, bumping to 0.1.0",
   "contributors": ["Markavian"],
   "dependencies": {
   }
