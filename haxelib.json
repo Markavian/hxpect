@@ -5,9 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "releasenote":
-      "Changed test style for expecting exceptions to expect(method).to.throwException() and expect(method).to.not.throwException()",
+      "Changed build process to pack up src/ directory as root so it can correctly be included into external projects.",
   "contributors": ["Markavian"],
   "dependencies": {
   }
