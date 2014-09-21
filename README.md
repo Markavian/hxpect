@@ -42,6 +42,12 @@ Hxpect allows tests to be written in the form:
 	expect(actual).to.beNull();
 	expect(actual).to.not.beNull();
 	
+The reverse form of not works too:
+	
+	expect(actual).to.be(expected);
+	expect(actual).not.to.be(expected);
+	expect(actual).to.not.be(expected);
+	
 ### Specs or Tests
 	
 You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style.
