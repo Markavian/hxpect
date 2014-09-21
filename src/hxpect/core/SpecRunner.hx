@@ -82,7 +82,7 @@ class SpecRunner
 			for (spec in instance.specs)
 			{
 				var indent = makeIndent(spec.tabLevel());
-				logger.logInfo(indent + "+ " + spec.name);
+				logger.log(indent + "+ " + spec.name);
 				for (step in spec.steps)
 				{
 					classSpecCount++;
