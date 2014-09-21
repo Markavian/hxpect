@@ -10,6 +10,11 @@ class BaseSpec
 	
 	public function run():Void
 	{
+		if (beforeStep == null)
+		{
+			beforeStep = function() { };
+		}
+		
 		var NL = "\n";
 		var TAB = "\t";
 		var exception = "Run method not implemented:" + NL

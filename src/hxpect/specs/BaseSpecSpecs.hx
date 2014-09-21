@@ -99,5 +99,19 @@ class BaseSpecSpecs extends BaseSpec
 				expect(y).to.be(3);
 			});
 		});
+		
+		var x = 0;
+		beforeEach(function()
+		{
+			x = 100;
+		});
+		
+		describe("Every describe block", function()
+		{
+			it("should run the beforeEach method", function()
+			{
+				expect(x).to.be(100);
+			});
+		});
 	}
 }

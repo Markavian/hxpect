@@ -135,12 +135,36 @@ class BaseSpecTests extends BaseSpec
 		evaluate();
 	}
 	
+	public function test_beforeEach_describeBlock()
+	{
+		var x = 0;
+		beforeEach(function()
+		{
+			x = 100;
+		});
+		
+		describe("Every describe block", function()
+		{
+			it("should run the beforeEach method", function()
+			{
+				expect(x).to.be(100);
+			});
+		});
+		
+		evaluate();
+	}
+	
 	function evaluate():Void
 	{
 		for (spec in specs)
 		{
 			for (step in spec.steps)
 			{
+				if (beforeStep != null)
+				{
+					beforeStep();
+				}
+				
 				spec.beforeSteps();
 				step.step();
 			}

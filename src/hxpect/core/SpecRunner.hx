@@ -86,6 +86,7 @@ class SpecRunner
 				for (step in spec.steps)
 				{
 					classSpecCount++;
+					instance.beforeStep();
 					var success = runSpecStep(spec, step, indent);
 					if (success)
 					{
