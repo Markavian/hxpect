@@ -5,9 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "releasenote":
-      "Added SpecRunner and BaseSpec classes to support nested describe() and it() statements.",
+      "Fixed partially implemented beforeEach step which can be called outside of the initial describe() block.",
   "contributors": ["Markavian"],
   "dependencies": {
   }
