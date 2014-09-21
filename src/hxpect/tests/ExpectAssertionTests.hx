@@ -164,4 +164,21 @@ class ExpectAssertionTests extends BaseTest
 			Assert.assertEqual(exception, "Method unexpectedly threw an exception: Ignorable exception");
 		}
 	}
+	
+	public function test_theTypeOfAThing_shouldWork():Void
+	{
+		expect("my string").to.beOfType(String);
+		expect(new Array()).to.beOfType(Array);
+	}
+	
+	public function test_theTypeOfNotAThing_shouldThrowAnException():Void
+	{
+		expect(function() {
+			expect("my other string").to.not.beOfType(String);
+		}).to.throwException();
+		
+		expect(function() {
+			expect(new Array()).to.not.beOfType(Array);
+		}).to.throwException();
+	}
 }

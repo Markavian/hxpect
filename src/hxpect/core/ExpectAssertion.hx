@@ -26,6 +26,21 @@ class ExpectAssertion
 		}
 	}
 	
+	public function beOfType(expectedType:Class<Dynamic>):Void
+	{
+		var actualTypeName = Type.getClassName(Type.getClass(actualValue));
+		var expectedTypeName = Type.getClassName(expectedType);
+		
+		if (negativeFlag)
+		{
+			Assert.assertNotEqual(expectedTypeName, actualTypeName);
+		}
+		else
+		{
+			Assert.assertEqual(expectedTypeName, actualTypeName);
+		}
+	}
+	
 	public function beNull():Void
 	{
 		if (negativeFlag)
