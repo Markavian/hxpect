@@ -42,7 +42,7 @@ Hxpect allows tests to be written in the form:
 	expect(actual).to.beNull();
 	expect(actual).to.not.beNull();
 	
-The reverse form of not works too:
+The reverse form of not works as well:
 	
 	expect(actual).to.be(expected);
 	expect(actual).not.to.be(expected);
