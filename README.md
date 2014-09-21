@@ -170,9 +170,4 @@ See tasklist.md at https://github.com/Markavian/hxpect/blob/master/tasklist.md
 Release notes
 -------------
 
-### 0.0.3
-- Updated readme.md to include better information about project.
-
-### 0.0.2
-- Working set of tests, ready for inclusion in to an external project.
-	
+See the [hxpect lib](http://lib.haxe.org/p/hxpect) on haxelib.org for a full lis of release notes.
