@@ -1,4 +1,5 @@
 package hxpect.specs;
+
 import hxpect.core.BaseSpec;
 
 class BaseSpecSpecs extends BaseSpec
