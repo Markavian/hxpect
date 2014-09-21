@@ -36,6 +36,12 @@ Hxpect allows tests to be written in the form:
 	expect(method).to.not.throwException();
 	expect(method).to.not.throwException(specificException);
 	
+	expect(actual).to.beOfType(ExpectedType);
+	expect(actual).to.not.beOfType(UnexpectedType);
+	
+	expect(actual).to.beNull();
+	expect(actual).to.not.beNull();
+	
 ### Specs or Tests
 	
 You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style.
