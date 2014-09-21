@@ -1,4 +1,4 @@
-haxe  -cp src -neko bin/HxpectTests.n -main hxpect.Main
+haxe  build.hxml
 
 set errorlevel=
 neko bin/HxpectTests.n

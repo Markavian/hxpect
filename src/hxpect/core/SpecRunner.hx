@@ -129,7 +129,7 @@ class SpecRunner
 			return false;
 		}
 		
-		logger.logInfo(indent + TAB + "+ " + step.name); 
+		logger.logPass(indent + TAB + "+ " + step.name); 
 		return true;
 	}
 	

@@ -1,3 +1,4 @@
-haxe  -cp ../src -neko ../bin/HxpectTests.n -main "hxpect.Main"
+#!/bin/bash
+mkdir -p bin
+haxe build.hxml
 neko bin/HxpectTests.n
-
