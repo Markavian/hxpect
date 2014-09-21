@@ -16,7 +16,7 @@ class BaseSpec
 			+ "Add the following to " + Type.getClassName(Type.getClass(this)) + ":" + NL
 			+ TAB + 'override public function run() {' + NL
 			+ TAB + TAB + 'describe("My feature", function() {' + NL
-			+ TAB + TAB + TAB + 'it("should evaliate true to be true", function() {' + NL
+			+ TAB + TAB + TAB + 'it("should evaluate true to be true", function() {' + NL
 			+ TAB + TAB + TAB + TAB + 'expect(true).to.be(false);' + NL
 			+ TAB + TAB + TAB + '});' + NL
 			+ TAB + TAB + '});' + NL
