@@ -2,7 +2,7 @@ package hxpect.core;
 
 class BaseTest
 {
-	public function expect(actualValue:Dynamic):ExpectAssertion
+	function expect(actualValue:Dynamic):ExpectAssertion
 	{
 		return new ExpectAssertion(actualValue);
 	}

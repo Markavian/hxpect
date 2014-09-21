@@ -6,14 +6,14 @@ class Assert
 	{
 		if (!actual)
 		{
-			throw "Actual value " + actual + " should be true";
+			throw "Actual value '" + actual + "' should be true";
 		}
 	}
 	public static function assertFalse(actual:Bool):Void
 	{
 		if (actual)
 		{
-			throw "Actual value " + actual + " should be false";
+			throw "Actual value '" + actual + "' should be false";
 		}
 	}
 	
@@ -21,7 +21,7 @@ class Assert
 	{
 		if (expected != actual)
 		{
-			throw "Actual value " + actual + " should equal expected value " + expected;
+			throw "Actual value '" + actual + "' should equal expected value '" + expected + "'";
 		}
 	}
 	
@@ -29,7 +29,7 @@ class Assert
 	{
 		if (expected == actual)
 		{
-			throw "Actual value " + actual + " should not equal expected value " + expected;
+			throw "Actual value '" + actual + "' should not equal expected value '" + expected + "'";
 		}
 	}
 	
@@ -37,7 +37,7 @@ class Assert
 	{
 		if (actual != null)
 		{
-			throw "Actual value " + actual + " should be null";
+			throw "Actual value '" + actual + "' should be null";
 		}
 	}
 	
@@ -45,7 +45,7 @@ class Assert
 	{
 		if (actual == null)
 		{
-			throw "Actual value " + actual + " should not be null";
+			throw "Actual value '" + actual + "' should not be null";
 		}
 	}
 }

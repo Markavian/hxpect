@@ -27,7 +27,7 @@ class TestRunner
 	
 	public function run():Void
 	{
-		beginTests();
+		printTitle();
 		
 		for (testClass in registeredTests)
 		{
@@ -37,7 +37,7 @@ class TestRunner
 		testsComplete();
 	}
 	
-	function beginTests():Void
+	function printTitle():Void
 	{
 		logger.logInfo("Hxpect Test Runner - tests initialised");
 		logger.logInfo("Operating system: " + logger.systemName());
@@ -46,14 +46,15 @@ class TestRunner
 	function runTestsOn(testClass:Class<Dynamic>):Void
 	{
 		var tests = Type.getInstanceFields(testClass);
-		var instance:BaseTest = Type.createEmptyInstance(testClass);
 		
 		logger.logEmptyLine();
 		logger.log("Running tests on " + Type.getClassName(testClass));
+		
 		var classTestCount:Int = 0;
 		var classSuccessCount:Int = 0;
 		for (testName in tests)
 		{
+			var instance:BaseTest = Type.createEmptyInstance(testClass);
 			if (testName.indexOf("test") != -1)
 			{
 				classTestCount++;
@@ -93,19 +94,27 @@ class TestRunner
 	
 	function runBeforeTest(instance:BaseTest):Void
 	{
-		var beforeEach:Void->Void = cast Reflect.field(instance, "beforeEach");
-		if (beforeEach != null)
-		{
-			Reflect.callMethod(instance, beforeEach, []); 
-		}
+		runMethodIfDefined(instance, "beforeEach");
 	}
 	
 	function runAfterTest(instance:BaseTest):Void
 	{
-		var afterEach:Void->Void = cast Reflect.field(instance, "afterEach");
-		if (afterEach != null)
+		runMethodIfDefined(instance, "afterEach");
+	}
+	
+	function runMethodIfDefined(instance:BaseTest, fieldName:String):Void
+	{
+		try
 		{
-			Reflect.callMethod(instance, afterEach, []); 
+			var method:Void->Void = cast Reflect.field(instance, fieldName);
+			if (method != null)
+			{
+				Reflect.callMethod(instance, method, []); 
+			}
+		}
+		catch (exception:Dynamic)
+		{
+			// do nothing
 		}
 	}
 	
@@ -115,16 +124,30 @@ class TestRunner
 		logger.logInfo("Total tests passed: " + totalSuccessCount + "/" + totalTestCount);
 		if (totalSuccessCount == totalTestCount)
 		{
-			logger.logPass("SUCCESS");
+			logger.logPass("SUCCESS - All tests passed");
 		}
 		else
 		{
-			logger.logFail("FAILIURE");
+			if (totalSuccessCount == 0)
+			{
+				logger.logFail("FAILIURE - No tests run");
+			}
+			else
+			{
+				logger.logFail("FAILIURE - " + failiures() + " tests failed");
+			}
 		}
+		
+		logger.logEmptyLine();
 	}
 	
-	public function failiures():Int
+	function failiures():Int
 	{
 		return (totalTestCount - totalSuccessCount);
+	}
+	
+	public function successful():Bool
+	{
+		return (failiures() == 0) && (totalSuccessCount > 0);
 	}
 }

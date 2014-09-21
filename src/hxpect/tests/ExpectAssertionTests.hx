@@ -36,7 +36,7 @@ class ExpectAssertionTests extends BaseTest
 		
 		expect(function() {
 			expect(actual).to.be(expected);
-		}).to.throwException("Actual value " + actual + " should equal expected value " + expected);
+		}).to.throwException("Actual value '" + actual + "' should equal expected value '" + expected + "'");
 	}
 	
 	public function test_expectToNotBe_shouldWork():Void
@@ -61,15 +61,15 @@ class ExpectAssertionTests extends BaseTest
 		
 		expect(function() {
 			expect(expected).to.not.be(actual);
-		}).to.throwException("Actual value " + actual + " should not equal expected value " + expected);
+		}).to.throwException("Actual value '" + actual + "' should not equal expected value '" + expected + "'");
 		
 		expect(function() {
 			expect(expected).not.be(actual);
-		}).to.throwException("Actual value " + actual + " should not equal expected value " + expected);
+		}).to.throwException("Actual value '" + actual + "' should not equal expected value '" + expected + "'");
 		
 		expect(function() {
 			expect(expected).not.to.be(actual);
-		}).to.throwException("Actual value " + actual + " should not equal expected value " + expected);
+		}).to.throwException("Actual value '" + actual + "' should not equal expected value '" + expected + "'");
 	}
 	
 	public function test_expectToBeNull_shouldWork():Void
@@ -87,7 +87,7 @@ class ExpectAssertionTests extends BaseTest
 		
 		expect(function() {
 			expect(actual).to.beNull();
-		}).to.throwException("Actual value " + actual + " should be null");
+		}).to.throwException("Actual value '" + actual + "' should be null");
 	}
 	
 	public function test_expectToThrowException_shouldCatchAnyException():Void

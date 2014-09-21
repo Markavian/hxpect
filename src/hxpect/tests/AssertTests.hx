@@ -16,7 +16,7 @@ class AssertTests extends BaseTest
 	{
 		expect(function() {
 			Assert.assertTrue(false);
-		}).to.throwException("Actual value " + false + " should be true");
+		}).to.throwException("Actual value '" + false + "' should be true");
 	}
 	
 	public function test_assertFalse_shouldWork()
@@ -30,7 +30,7 @@ class AssertTests extends BaseTest
 	{
 		expect(function() {
 			Assert.assertFalse(true);
-		}).to.throwException("Actual value " + true + " should be false");
+		}).to.throwException("Actual value '" + true + "' should be false");
 	}
 	
 	public function test_assertEqual_shouldWork()
@@ -50,7 +50,7 @@ class AssertTests extends BaseTest
 		
 		expect(function() {
 			Assert.assertEqual(expected, actual);
-		}).to.throwException("Actual value " + actual + " should equal expected value " + expected);
+		}).to.throwException("Actual value '" + actual + "' should equal expected value '" + expected + "'");
 	}
 	
 	public function test_assertNotEqual_shouldWork()
@@ -70,7 +70,7 @@ class AssertTests extends BaseTest
 		
 		expect(function() {
 			Assert.assertNotEqual(expected, actual);
-		}).to.throwException("Actual value " + actual + " should not equal expected value " + expected);
+		}).to.throwException("Actual value '" + actual + "' should not equal expected value '" + expected + "'");
 	}
 	
 	public function test_assertNull_shouldWork()
@@ -88,7 +88,7 @@ class AssertTests extends BaseTest
 		
 		expect(function() {
 			Assert.assertNull(actual);
-		}).to.throwException("Actual value " + actual + " should be null");
+		}).to.throwException("Actual value '" + actual + "' should be null");
 	}
 	
 	public function test_assertNotNull_shouldWork()
@@ -106,6 +106,6 @@ class AssertTests extends BaseTest
 		
 		expect(function() {
 			Assert.assertNotNull(actual);
-		}).to.throwException("Actual value " + actual + " should not be null");
+		}).to.throwException("Actual value '" + actual + "' should not be null");
 	}
 }

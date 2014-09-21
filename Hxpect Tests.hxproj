@@ -23,7 +23,7 @@
     <option directives="" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
-    <option mainClass="hxpect.tests.Main" />
+    <option mainClass="hxpect.Main" />
     <option enabledebug="False" />
     <option additional="" />
   </build>
@@ -34,6 +34,7 @@
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
     <compile path="src\hxpect\tests\Main.hx" />
+    <compile path="src\hxpect\Main.hx" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
