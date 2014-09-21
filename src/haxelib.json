@@ -5,9 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "releasenote":
-      "Fixed partially implemented beforeEach step which can be called outside of the initial describe() block.",
+      "Added support for expect(actual).to.beOfType(ExpectedType) and expect(actual).to.not.beOfType(UnexpectedType);",
   "contributors": ["Markavian"],
   "dependencies": {
   }
