@@ -40,6 +40,97 @@ Hxpect allows tests to be written in the form:
 	
 You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style.
 
+### Test reports
+
+The default runners produce readable test reports to help you debug. They can also be written to fail with a non-zero error code, and baked in as a pre-compile step to your projects. 
+
+### Sample Test Runner Report
+
+	Hxpect Test Runner - tests initialised
+	Operating system: Mac
+
+	Running tests on hxpect.tests.AssertTests
+	+ Test passed: test_assertNull_shouldWork
+	+ Test passed: test_assertEqual_shouldThrowException
+	+ Test passed: test_assertEqual_shouldWork
+	+ Test passed: test_assertNull_shouldThrowAnException
+	+ Test passed: test_assertNotNull_shouldWork
+	+ Test passed: test_assertTrue_shouldThrowAnException
+	+ Test passed: test_assertNotEqual_shouldThrowAnException
+	+ Test passed: test_assertTrue_shouldWork
+	+ Test passed: test_assertNotNull_shouldThrowAnException
+	+ Test passed: test_assertNotEqual_shouldWork
+	+ Test passed: test_assertFalse_shouldWork
+	+ Test passed: test_assertFalse_shouldThrowAnException
+	Tests passed: 12/12
+
+	Running tests on hxpect.tests.BaseTestTests
+	+ Test passed: test_expectReturnsExpectAssert
+	Tests passed: 1/1
+
+	Running tests on hxpect.tests.BaseSpecTests
+	+ Test passed: test_beforeEach
+	+ Test passed: test_beforeEach_describeBlock
+	+ Test passed: test_describe
+	+ Test passed: test_nestedSpecs
+	+ Test passed: test_fullDescription
+	+ Test passed: test_it
+	Tests passed: 6/6
+
+	Running tests on hxpect.tests.ExpectAssertionTests
+	+ Test passed: test_expectToThrowException_shouldCatchAnyException
+	+ Test passed: test_expectToReturnsExpectAssert
+	+ Test passed: test_expectToBeNull_shouldWork
+	+ Test passed: test_expectToBe_shouldThrowAnException
+	+ Test passed: test_expectToThrowException_shouldCatchException
+	+ Test passed: test_expectNotReturnsExpectAssert
+	+ Test passed: test_expectToNotThrowException_shouldCatchAnyException
+	+ Test passed: test_expectToBe_shouldWork
+	+ Test passed: test_expectToNotThrowException_shouldCatchASpecificException
+	+ Test passed: test_expectToNotBe_shouldWork
+	+ Test passed: test_expectToNotThrowException_shouldIgnoreExceptionsThatDontMatch
+	+ Test passed: test_expectToNotBe_shouldThrowAnException
+	+ Test passed: test_expectToBeNull_shouldThrowAnException
+	Tests passed: 13/13
+
+	Running tests on hxpect.tests.LoggerTests
+	+ Test passed: test_logColor_onFlash
+	+ Test passed: test_log
+	+ Test passed: test_logColor_onOtherOperatingSytems
+	+ Test passed: test_logColor_onWindows
+	Tests passed: 4/4
+
+	Total tests passed: 36/36
+	SUCCESS - All tests passed
+
+### Sample Spec Runner Report
+
+	Hxpect Spec Runner - specs initialised
+	Operating system: Windows
+	Running hxpect.specs.BaseSpecSpecs:run
+	+ An empty describe block
+	+ Using the it block
+		+ should register a new step
+	+ Using the beforeEach block
+		+ should call the before each block before each test
+	+ A full spec
+		+ should process beforeEach, and then run the first spec
+		+ should process beforeEach, and then run the second spec
+	+ A nested spec
+		+ should run a spec in isolation
+		+ should run specs defined after nested steps in isolation
+		+ The nested part
+			+ should also be run in isolation
+	+ Every describe block
+		+ should run the beforeEach method
+	Specs passed: 8/8
+
+	Total specs passed: 8/8
+	SUCCESS - All specs passed
+
+Examples
+--------
+
 ### Test Class Example
 
 An example test class:
