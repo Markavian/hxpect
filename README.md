@@ -36,9 +36,13 @@ Hxpect allows tests to be written in the form:
 	expect(method).to.not.throwException();
 	expect(method).to.not.throwException(specificException);
 	
-### Example
+### Specs or Tests
+	
+You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style.
 
-An example test class
+### Test Class Example
+
+An example test class:
 
 	class ProjectTests extends BaseTest 
 	{
@@ -57,6 +61,40 @@ An example test class
 		}
 	}
 
+Currently tests must extend from BaseTest and are recognised from each class if they begin with "test_". Tests are attempted to be run in isolation by creating a new object instance for each test execution, and beforeEach and afterEach steps are ran if found.
+
+### Spec Class Example
+
+An example spec class:
+	
+	class ProjectSpecs extends BaseSpec 
+	{
+		override public function run():Void
+		{
+			var thingUnderTest:SomeType;
+			
+			beforeEach(function()
+			{
+				thingUnderTest = new SomeType();
+			});
+			
+			describe("Some feature", function()
+			{
+				it("should produce the correct result", function()
+				{
+					var expected = "expected result";
+					var actual = thingUnderTest.someResult();
+					
+					expect(actual).to.be(expected);
+				});
+			});
+		}
+	}
+	
+Current specs must extend from BaseSpec and override the run method. Spec files are run in isolation, but because of the nesting and hierarchy, some shared state may occur depending on how you structure the file.
+	
+The main advantage of using the spec style of tests is that it produces a more readable test report, and encourages concise naming of tests around specific features.
+	
 ### Assertions
 
 Underlying the fluid expect calls are basic assertions that will throw exceptions, for example:
@@ -70,9 +108,10 @@ Underlying the fluid expect calls are basic assertions that will throw exception
 	Assert.isNull(value);
 	Assert.isNotNull(value)
 
-### Test Runner
+### Test Runner and Spec Runner
 
-At present, test classes must be manually added to a compiled runner. Such a program might look like:
+At present, test classes must be manually added to a compiled runner.
+As such, the main program for a BaseTest runner might look like:
 	
 	class Main 
 	{
@@ -81,21 +120,46 @@ At present, test classes must be manually added to a compiled runner. Such a pro
 			var testRunner = new TestRunner();
 			testRunner.registerTestClass(AssertTests);
 			testRunner.registerTestClass(BaseTestTests);
+			testRunner.registerTestClass(BaseSpecTests);
 			testRunner.registerTestClass(ExpectAssertionTests);
 			testRunner.registerTestClass(LoggerTests);
 			testRunner.run();
 			
-			var successful = (testRunner.failiures() == 0);
+			var successful = testRunner.successful();
 			
-			Sys.exit(successful ? 0 : 1);
+			#if (flash || html5)
+				var result = (successful) ? "Success" : "Failed";
+				trace("Test runner: " + result);
+			#else
+				Sys.exit(successful ? 0 : 1);
+			#end
 		}
 	}
 	
-Currently tests are recognised from each class if they begin with "test_". Tests are attempted to be run in isolation by creating a new object instance for each test execution, and beforeEach and afterEach steps are ran if found.
- 	
-The above program can be compiled and run with the command:
+The main class for a BaseSpec runner might look like:
 	
-	haxe  -cp ../src -neko ../bin/HxpectTests.n -main "hxpect.tests.Main"
+	class Main 
+	{
+		static function main() 
+		{
+			var specRunner = new SpecRunner();
+			specRunner.registerSpecClass(BaseSpecSpecs);
+			specRunner.run();
+			
+			var successful = specRunner.successful();
+			
+			#if (flash || html5)
+				var result = (successful) ? "Success" : "Failed";
+				trace("Test runner: " + result);
+			#else
+				Sys.exit(successful ? 0 : 1);
+			#end
+		}
+	}
+	 	
+The above program examples can be compiled and run with the command:
+	
+	haxe  -cp src -neko bin/HxpectTests.n -main "hxpect.tests.Main"
 	neko bin/HxpectTests.n
 	
 Plans for future
