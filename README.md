@@ -26,7 +26,7 @@ Hxpect should work with any haxe project, although specifically it was designed 
 ### Expectations
 
 Hxpect allows tests to be written in the form:
-	
+```haxe	
 	expect(actual).to.be(expected);
 	expect(actual).to.not.be(expected);
 
@@ -41,13 +41,13 @@ Hxpect allows tests to be written in the form:
 	
 	expect(actual).to.beNull();
 	expect(actual).to.not.beNull();
-	
+```	
 The reverse form of not works as well:
-	
+```haxe	
 	expect(actual).to.be(expected);
 	expect(actual).not.to.be(expected);
 	expect(actual).to.not.be(expected);
-	
+```	
 ### Specs or Tests
 	
 You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style.
@@ -146,7 +146,7 @@ Examples
 ### Test Class Example
 
 An example test class:
-
+```haxe
 	class ProjectTests extends BaseTest 
 	{
 		var thingUnderTest:SomeType;
@@ -163,13 +163,13 @@ An example test class:
 			expect(actual).to.be(expected);
 		}
 	}
-
+```
 Currently tests must extend from BaseTest and are recognised from each class if they begin with "test_". Tests are attempted to be run in isolation by creating a new object instance for each test execution, and beforeEach and afterEach steps are ran if found.
 
 ### Spec Class Example
 
 An example spec class:
-	
+```haxe	
 	class ProjectSpecs extends BaseSpec 
 	{
 		override public function run():Void
@@ -193,7 +193,7 @@ An example spec class:
 			});
 		}
 	}
-	
+```	
 Current specs must extend from BaseSpec and override the run method. Spec files are run in isolation, but because of the nesting and hierarchy, some shared state may occur depending on how you structure the file.
 	
 The main advantage of using the spec style of tests is that it produces a more readable test report, and encourages concise naming of tests around specific features.
@@ -201,7 +201,7 @@ The main advantage of using the spec style of tests is that it produces a more r
 ### Assertions
 
 Underlying the fluid expect calls are basic assertions that will throw exceptions, for example:
-	
+```haxe	
 	Assert.isTrue(value);
 	Assert.isFalse(value);
 	
@@ -210,12 +210,12 @@ Underlying the fluid expect calls are basic assertions that will throw exception
 	
 	Assert.isNull(value);
 	Assert.isNotNull(value)
-
+```
 ### Test Runner and Spec Runner
 
 At present, test classes must be manually added to a compiled runner.
 As such, the main program for a BaseTest runner might look like:
-	
+```haxe	
 	class Main 
 	{
 		static function main() 
@@ -238,9 +238,9 @@ As such, the main program for a BaseTest runner might look like:
 			#end
 		}
 	}
-	
+```	
 The main class for a BaseSpec runner might look like:
-	
+```haxe	
 	class Main 
 	{
 		static function main() 
@@ -259,7 +259,7 @@ The main class for a BaseSpec runner might look like:
 			#end
 		}
 	}
-	 	
+```	 	
 The above program examples can be compiled and run with the command:
 	
 	haxe  -cp src -neko bin/HxpectTests.n -main "hxpect.tests.Main"
