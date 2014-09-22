@@ -287,6 +287,6 @@ Other haxe based test frameworks
 ---------------------
 
 You may also be interested in:
-+ MassiveUnit - https://github.com/massiveinteractive/MassiveUnit/
++ MassiveUnit - https://github.com/massiveinteractive/MassiveUnit
 + Buddy - https://github.com/ciscoheat/buddy
-+ Hxunit - https://code.google.com/p/hxunit/
++ Hxunit - https://code.google.com/p/hxunit
