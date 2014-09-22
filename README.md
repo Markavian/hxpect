@@ -282,3 +282,11 @@ Release notes
 -------------
 
 See the [hxpect lib](http://lib.haxe.org/p/hxpect) on haxelib.org for a full lis of release notes.
+
+Other haxe based test frameworks
+---------------------
+
+You may also be interested in:
++ MassiveUnit - https://github.com/massiveinteractive/MassiveUnit/
++ Buddy - https://github.com/ciscoheat/buddy
++ Hxunit - https://code.google.com/p/hxunit/
