@@ -276,7 +276,7 @@ The above program examples can be compiled and run with the command:
 Plans for future
 ----------------
 
-See tasklist.md at https://github.com/Markavian/hxpect/blob/master/tasklist.md
+See [tasklist.md](https://github.com/Markavian/hxpect/blob/master/tasklist.md) for a list of planned features and wishlist items.
 	
 Release notes
 -------------
