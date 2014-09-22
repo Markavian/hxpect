@@ -147,6 +147,8 @@ Examples
 
 An example test class:
 ```haxe
+	import hxpect.core.BaseTest;
+
 	class ProjectTests extends BaseTest 
 	{
 		var thingUnderTest:SomeType;
@@ -170,6 +172,8 @@ Currently tests must extend from BaseTest and are recognised from each class if 
 
 An example spec class:
 ```haxe	
+	import hxpect.core.BaseSpec;
+	
 	class ProjectSpecs extends BaseSpec 
 	{
 		override public function run():Void
@@ -216,6 +220,8 @@ Underlying the fluid expect calls are basic assertions that will throw exception
 At present, test classes must be manually added to a compiled runner.
 As such, the main program for a BaseTest runner might look like:
 ```haxe	
+	import hxpect.core.TestRunner;
+
 	class Main 
 	{
 		static function main() 
@@ -241,6 +247,8 @@ As such, the main program for a BaseTest runner might look like:
 ```	
 The main class for a BaseSpec runner might look like:
 ```haxe	
+	import hxpect.core.SpecRunner;
+
 	class Main 
 	{
 		static function main() 
