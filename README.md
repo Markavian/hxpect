@@ -66,7 +66,7 @@ The default runners produce readable test reports to help you debug. They can al
 Getting started
 --------
 
-Make a test class, or a spec class in the src/tests/ directory:
+Make a test class, or a spec class in the src/tests/ directory. Tests need to extend BaseTest, and test names need to be prefixed with "test_". Specs need to extend BaseSpec, and need to be called from within a run() block. Have a look at the two examples below and decide what style you want to go with.
 
 ### Test Class Style
 
