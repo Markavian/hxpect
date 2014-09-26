@@ -10,9 +10,9 @@ Hxpect currently only supports Haxe 3.
 Installation
 ------------
 
-To install you must have [Haxe](http://www.haxe.org) installed
+To install you must have [Haxe](http://www.haxe.org) installed.
 
-Then just use haxelib to download the latest version
+Then just use haxelib to download the latest version:
 
 	haxelib install hxpect
 
@@ -57,19 +57,37 @@ The reverse form of not works as well:
 ```	
 ### Specs or Tests
 	
-You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style.
+You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style. Examples of each type are provided below in Getting Started.
 
 ### Test reports
 
 The default runners produce readable test reports to help you debug. They can also be written to fail with a non-zero error code, and baked in as a pre-compile step to your projects. 
 
-Examples
+### Assertions
+
+Underlying the fluid expect calls are basic assertions that will throw exceptions, for example:
+```haxe	
+	Assert.isTrue(value);
+	Assert.isFalse(value);
+	
+	Assert.isEqual(expected, actual);
+	Assert.isNotEqual(expected, actual);
+	
+	Assert.isNull(value);
+	Assert.isNotNull(value)
+```
+
+Getting started
 --------
 
-### Test Class Example
+Make a test class, or a spec class in the src/tests directory. Tests need to extend BaseTest, and test names need to be prefixed with "test_". Specs need to extend BaseSpec, and need to be called from within a run() block. Have a look at the two examples below and decide what style you want to go with.
+
+### Test Class Style
 
 An example test class:
 ```haxe
+	package tests;
+
 	import hxpect.core.BaseTest;
 
 	class ProjectTests extends BaseTest 
@@ -91,10 +109,12 @@ An example test class:
 ```
 Currently tests must extend from BaseTest and are recognised from each class if they begin with "test_". Tests are attempted to be run in isolation by creating a new object instance for each test execution, and beforeEach and afterEach steps are ran if found.
 
-### Spec Class Example
+### Spec Class Style
 
 An example spec class:
 ```haxe	
+	package tests;
+
 	import hxpect.core.BaseSpec;
 	
 	class ProjectSpecs extends BaseSpec 
@@ -125,19 +145,6 @@ Current specs must extend from BaseSpec and override the run method. Spec files 
 	
 The main advantage of using the spec style of tests is that it produces a more readable test report, and encourages concise naming of tests around specific features.
 	
-### Assertions
-
-Underlying the fluid expect calls are basic assertions that will throw exceptions, for example:
-```haxe	
-	Assert.isTrue(value);
-	Assert.isFalse(value);
-	
-	Assert.isEqual(expected, actual);
-	Assert.isNotEqual(expected, actual);
-	
-	Assert.isNull(value);
-	Assert.isNotNull(value)
-```
 ### Test Runner and Spec Runner
 
 To run tests on your project, put your BaseTest or BaseSpec files with your source code and run:
