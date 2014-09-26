@@ -10,9 +10,9 @@ Hxpect currently only supports Haxe 3.
 Installation
 ------------
 
-To install you must have [Haxe](http://www.haxe.org) installed
+To install you must have [Haxe](http://www.haxe.org) installed.
 
-Then just use haxelib to download the latest version
+Then just use haxelib to download the latest version:
 
 	haxelib install hxpect
 
