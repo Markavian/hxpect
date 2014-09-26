@@ -1,3 +1,4 @@
--cp src 
--neko bin/HxpectTests.n
--main hxpect.Main
+-cp src
+-cp runner/src 
+-neko src/run.n
+-main hxpect.Runner

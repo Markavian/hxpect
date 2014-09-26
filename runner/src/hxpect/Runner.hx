@@ -4,6 +4,7 @@ import hxpect.core.Logger;
 import hxpect.runner.Compiler;
 import hxpect.runner.Help;
 import hxpect.runner.Utils;
+import sys.FileSystem;
 
 class Runner
 {
@@ -16,6 +17,8 @@ class Runner
 	
 	var sourceFolder:String;
 	var testFolder:String;
+	var excludeHxpectLib:Bool;
+	var regenerateHxml:Bool;
 	
 	function new()
 	{
@@ -34,25 +37,59 @@ class Runner
 	function processArguments():Void
 	{
 		args = Sys.args();
-		workingPath = Sys.getCwd();
-		if (args.length > 0)
+		
+		if (args.remove("-excludeHxpectLib"))
 		{
-			workingPath = args.pop();
+			excludeHxpectLib = true;
+		}
+		
+		if (args.remove("-regen"))
+		{
+			regenerateHxml = true;
 		}
 		
 		sourceFolder = Utils.shiftArg(args, "src");
 		testFolder = Utils.shiftArg(args, "src");
+		
+		workingPath = Sys.getCwd();
+		if (args.length > 0)
+		{
+			var lastArg = args.pop();
+			if (FileSystem.exists(lastArg) && FileSystem.isDirectory(lastArg))
+			{
+				workingPath = args.pop();
+			}
+			else
+			{
+				args.push(lastArg);
+			}
+		}
 	}
 	
 	function tryToCompile():Void
 	{		
-		logger.logInfo("Arguments: " + args.join(" "));
-		logger.logEmptyLine();
+		logger.logInfo("Source folder: " + sourceFolder);
+		logger.logInfo("Tests folder: " + testFolder);
+		logger.logInfo("Additional arguments: " + args.join(" "));
 		
-		logger.log("Building test runner:");
 		try
 		{
 			compiler.setup(workingPath, sourceFolder, testFolder, args);
+			
+			if (excludeHxpectLib)
+			{
+				logger.logInfo("Option enabled: Excluding hxpect lib from runner.");
+				compiler.excludeHxpectLib();
+			}
+			
+			if (regenerateHxml)
+			{
+				logger.logInfo("Option enabled: Regenerating HXML file.");
+				compiler.regenerateHxmlFile();
+			}
+			
+			logger.logEmptyLine();
+			logger.log("Building test runner:");
 			compiler.buildTestRunner();
 		}
 		catch (exception:Dynamic)

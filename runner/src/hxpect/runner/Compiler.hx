@@ -13,6 +13,9 @@ class Compiler
 		this.logger = logger;
 	}
 	
+	private var flagIncludeHxpectLib:Bool;
+	private var flagRegenerateHxmlFile:Bool;
+	
 	private var workingPath:String;
 	private var sourcePath:String;
 	private var testPath:String;
@@ -25,6 +28,8 @@ class Compiler
 	
 	public function setup(workingPath:String, sourceDirectory:String, testDirectory:String, additionalArgs:Array<String>):Void
 	{
+		this.flagIncludeHxpectLib = true;
+		
 		this.workingPath = workingPath;
 		this.sourcePath = workingPath + sourceDirectory;
 		this.testPath = workingPath + testDirectory;
@@ -34,6 +39,16 @@ class Compiler
 		this.mainFilePath = binarySourcePath + "/hxpect/TempTestRunner.hx";
 		this.hxmlFilePath = binarySourcePath + "/tests.hxml";
 		this.outputFilePath = binarySourcePath + "/tests.n";
+	}
+	
+	public function excludeHxpectLib()
+	{
+		this.flagIncludeHxpectLib = false;
+	}
+	
+	public function regenerateHxmlFile()
+	{
+		this.flagRegenerateHxmlFile = true;
 	}
 	
 	public function buildTestRunner()
@@ -69,21 +84,35 @@ class Compiler
 	
 	function createMainFile():Void
 	{
+		logger.logInfo("Generating Test Runner class: " + mainFilePath);
+		
 		var sourceFiles = listFiles(testPath);
 		var mainFileContents = Template.defineMain(testPath, sourceFiles);
 		
 		writeStringToFile(mainFileContents, mainFilePath);
+		
+		logger.logEmptyLine();
 	}
 	
 	function createHxmlFile():Void
-	{
+	{		
 		if (FileSystem.exists(hxmlFilePath))
 		{
-			logger.logWarning("HXML File already exists at " + hxmlFilePath + "\n - edit this file to suit your needs, or delete to regenerate.");
-			return;
+			if (flagRegenerateHxmlFile)
+			{
+				logger.logInfo("Regenerating HXML File, overwriting existing file: " + hxmlFilePath);
+			}
+			else
+			{
+				logger.logWarning("HXML File already exists at " + hxmlFilePath + "\n - edit this file to suit your needs, or delete to regenerate.");
+				return;
+			}
 		}
 		
 		var NL = "\n";
+		
+		var hxpectLib:String = (flagIncludeHxpectLib) ? "-lib hxpect " + NL : "";
+		
 		var fileContents = ""
 			+ "-cp " + binarySourcePath + NL
 			+ "-cp " + sourcePath + " " + NL
@@ -91,11 +120,15 @@ class Compiler
 			+ NL
 			+ "-main hxpect.TempTestRunner " + NL
 			+ NL
-			+ "-lib hxpect " + NL
+			+ hxpectLib
 			+ "-lib openfl " + NL
 			+ "--remap flash:openfl " + NL
 			+ "-lib actuate " + NL
 			+ "-neko " + outputFilePath;
+		
+		logger.logInfo("HXML File Contents:");
+		logger.logInfo(fileContents);
+		logger.logEmptyLine();
 			
 		writeStringToFile(fileContents, hxmlFilePath);
 	}
@@ -108,6 +141,7 @@ class Compiler
 		{
 			Sys.exit(compileResult.code);
 		}
+		logger.logEmptyLine();
 	}
 	
 	public function runTestsAndExit():Void

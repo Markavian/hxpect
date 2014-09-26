@@ -1,5 +1,5 @@
 haxe build.hxml
 
 set errorlevel=
-neko bin/HxpectTests.n
+neko src/run.n -excludeHxpectLib -regen
 exit /b %errorlevel%
