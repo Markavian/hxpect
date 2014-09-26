@@ -57,11 +57,25 @@ The reverse form of not works as well:
 ```	
 ### Specs or Tests
 	
-You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style.
+You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style. Examples of each type are provided below in Getting Started.
 
 ### Test reports
 
 The default runners produce readable test reports to help you debug. They can also be written to fail with a non-zero error code, and baked in as a pre-compile step to your projects. 
+
+### Assertions
+
+Underlying the fluid expect calls are basic assertions that will throw exceptions, for example:
+```haxe	
+	Assert.isTrue(value);
+	Assert.isFalse(value);
+	
+	Assert.isEqual(expected, actual);
+	Assert.isNotEqual(expected, actual);
+	
+	Assert.isNull(value);
+	Assert.isNotNull(value)
+```
 
 Getting started
 --------
@@ -131,23 +145,6 @@ Current specs must extend from BaseSpec and override the run method. Spec files 
 	
 The main advantage of using the spec style of tests is that it produces a more readable test report, and encourages concise naming of tests around specific features.
 	
-Once you've created your test or spec, run it by executing the following command from your project root:
-
-	haxelib run hxpect 
-	
-### Assertions
-
-Underlying the fluid expect calls are basic assertions that will throw exceptions, for example:
-```haxe	
-	Assert.isTrue(value);
-	Assert.isFalse(value);
-	
-	Assert.isEqual(expected, actual);
-	Assert.isNotEqual(expected, actual);
-	
-	Assert.isNull(value);
-	Assert.isNotNull(value)
-```
 ### Test Runner and Spec Runner
 
 To run tests on your project, put your BaseTest or BaseSpec files with your source code and run:
