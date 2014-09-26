@@ -1,4 +1,4 @@
 #!/bin/bash
 mkdir -p bin
 haxe build.hxml
-neko bin/HxpectTests.n
+neko src/run.n -excludeHxpectLib -regen
