@@ -5,9 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "releasenote":
-      "Added support for expect(actual).to.beOfType(ExpectedType) and expect(actual).to.not.beOfType(UnexpectedType);",
+      "Added run command, use haxelib run hxpect from the project folder to compile any tests under the src/ directory.",
   "contributors": ["Markavian"],
   "dependencies": {
   }
