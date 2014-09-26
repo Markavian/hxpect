@@ -18,15 +18,11 @@ class SpecRunner
 		// e.g. registerTestClass(CheckoutTest);
 		
 		logger = new Logger();
+		registeredSpecs = new Array<Dynamic>();
 	}
 	
 	public function registerSpecClass(testClass:Class<Dynamic>):Void
 	{
-		if (registeredSpecs == null)
-		{
-			registeredSpecs = new Array<Dynamic>();
-		}
-		
 		registeredSpecs.push(testClass);
 	}
 	
@@ -44,6 +40,7 @@ class SpecRunner
 	
 	function printTitle():Void
 	{
+		logger.logEmptyLine();
 		logger.logInfo("Hxpect Spec Runner - specs initialised");
 		logger.logInfo("Operating system: " + logger.systemName());
 	}
@@ -53,7 +50,7 @@ class SpecRunner
 		if (Type.getSuperClass(specClass) != BaseSpec)
 		{
 			logger.logEmptyLine();
-			logger.log("Skipping non-spec class " + Type.getClassName(specClass));
+			// logger.log("Skipping non-spec class " + Type.getClassName(specClass));
 			return;
 		}
 		
@@ -61,23 +58,30 @@ class SpecRunner
 		classSuccessCount = 0;
 		
 		var instance:BaseSpec = Type.createEmptyInstance(specClass);
+	
 		runSpecs(instance, "run");
 		
 		logger.log("Specs passed: " + classSuccessCount + "/" + classSpecCount);
+		logger.logEmptyLine();
 		
 		totalSpecCount += classSpecCount;
 		totalSuccessCount += classSuccessCount;
 	}
 	
-	function runSpecs(instance:BaseSpec, specName:String):Void
+	function runSpecs(instance:BaseSpec, runMethod:String):Void
 	{
 		var TAB = "\t";
 		
 		try
 		{
-			Reflect.callMethod(instance, Reflect.field(instance, specName), []);
+			logger.logInfo("Running " + Type.getClassName(Type.getClass(instance)) + ":" + runMethod);
 			
-			logger.logInfo("Running " + Type.getClassName(Type.getClass(instance)) + ":" + specName);
+			Reflect.callMethod(instance, Reflect.field(instance, runMethod), []);
+			
+			if (instance.specs == null)
+			{
+				throw "No specs defined after calling run method";
+			}
 			
 			for (spec in instance.specs)
 			{
@@ -97,7 +101,8 @@ class SpecRunner
 		}
 		catch (exception:Dynamic)
 		{
-			logger.logFail("- Spec failed: " + specName + ", reason: " + exception);
+			logger.logFail("- Spec failed: " + runMethod + ", reason: " + exception);
+			classSpecCount++;
 		}
 	}
 	
@@ -135,7 +140,6 @@ class SpecRunner
 	
 	function specsComplete():Void
 	{
-		logger.logEmptyLine();
 		logger.logInfo("Total specs passed: " + totalSuccessCount + "/" + totalSpecCount);
 		if (successful())
 		{

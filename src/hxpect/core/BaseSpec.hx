@@ -8,12 +8,22 @@ class BaseSpec
 	
 	private var currentSpec:DescribeStep;
 	
-	public function run():Void
+	function init()
 	{
 		if (beforeStep == null)
 		{
 			beforeStep = function() { };
 		}
+		
+		if (specs == null)
+		{
+			specs = new Array<DescribeStep>();
+		}
+	}
+	
+	public function run():Void
+	{
+		init();
 		
 		var NL = "\n";
 		var TAB = "\t";
@@ -32,10 +42,7 @@ class BaseSpec
 	
 	function describe(feature:String, spec:Void->Void):Void
 	{
-		if (specs == null)
-		{
-			specs = new Array<DescribeStep>();
-		}
+		init();
 		
 		var previousSpec = currentSpec;
 		

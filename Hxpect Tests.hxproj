@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\HxpectTests.n" />
+    <movie path="src\run.n" />
     <movie fps="0" />
     <movie width="0" />
     <movie height="0" />
@@ -17,13 +17,14 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
+    <class path="runner\src" />
   </classpaths>
   <!-- Build options -->
   <build>
     <option directives="" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
-    <option mainClass="hxpect.Main" />
+    <option mainClass="hxpect.Runner" />
     <option enabledebug="False" />
     <option additional="" />
   </build>
@@ -43,7 +44,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False">scripts/run_tests.bat</postBuildCommand>
+  <postBuildCommand alwaysRun="False">neko src/run.n</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />

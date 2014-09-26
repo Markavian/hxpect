@@ -4,6 +4,16 @@ import hxpect.core.BaseSpec;
 
 class BaseSpecTests extends BaseSpec
 {
+	override public function run()
+	{
+		test_run();
+	}
+	
+	public function afterEach():Void
+	{
+		evaluate();
+	}
+	
 	public function test_describe():Void
 	{
 		describe("An empty describe block", function()
@@ -154,6 +164,17 @@ class BaseSpecTests extends BaseSpec
 		evaluate();
 	}
 	
+	public function test_run():Void
+	{
+		describe("The run method", function()
+		{
+			it("should be implemented by all BaseSpec classes", function()
+			{
+				expect(Reflect.field(this, "run")).to.not.beNull();
+			});
+		});
+	}
+	
 	function evaluate():Void
 	{
 		for (spec in specs)
@@ -169,5 +190,7 @@ class BaseSpecTests extends BaseSpec
 				step.step();
 			}
 		}
+		
+		specs = null;
 	}
 }

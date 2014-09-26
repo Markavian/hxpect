@@ -13,15 +13,11 @@ class TestRunner
 		// e.g. registerTestClass(CheckoutTest);
 		
 		logger = new Logger();
+		registeredTests = new Array<Dynamic>();
 	}
 	
 	public function registerTestClass(testClass:Class<Dynamic>):Void
 	{
-		if (registeredTests == null)
-		{
-			registeredTests = new Array<Dynamic>();
-		}
-		
 		registeredTests.push(testClass);
 	}
 	
@@ -39,6 +35,7 @@ class TestRunner
 	
 	function printTitle():Void
 	{
+		logger.logEmptyLine();
 		logger.logInfo("Hxpect Test Runner - tests initialised");
 		logger.logInfo("Operating system: " + logger.systemName());
 	}
