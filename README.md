@@ -80,7 +80,7 @@ Underlying the fluid expect calls are basic assertions that will throw exception
 Getting started
 --------
 
-Make a test class, or a spec class in the src/tests/ directory. Tests need to extend BaseTest, and test names need to be prefixed with "test_". Specs need to extend BaseSpec, and need to be called from within a run() block. Have a look at the two examples below and decide what style you want to go with.
+Make a test class, or a spec class in the src/tests directory. Tests need to extend BaseTest, and test names need to be prefixed with "test_". Specs need to extend BaseSpec, and need to be called from within a run() block. Have a look at the two examples below and decide what style you want to go with.
 
 ### Test Class Style
 
