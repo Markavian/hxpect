@@ -63,13 +63,17 @@ You can either extend from BaseTest, and write XUnit style tests, or extend from
 
 The default runners produce readable test reports to help you debug. They can also be written to fail with a non-zero error code, and baked in as a pre-compile step to your projects. 
 
-Examples
+Getting started
 --------
 
-### Test Class Example
+Make a test class, or a spec class in the src/tests/ directory:
+
+### Test Class Style
 
 An example test class:
 ```haxe
+	package tests;
+
 	import hxpect.core.BaseTest;
 
 	class ProjectTests extends BaseTest 
@@ -91,10 +95,12 @@ An example test class:
 ```
 Currently tests must extend from BaseTest and are recognised from each class if they begin with "test_". Tests are attempted to be run in isolation by creating a new object instance for each test execution, and beforeEach and afterEach steps are ran if found.
 
-### Spec Class Example
+### Spec Class Style
 
 An example spec class:
 ```haxe	
+	package tests;
+
 	import hxpect.core.BaseSpec;
 	
 	class ProjectSpecs extends BaseSpec 
@@ -124,6 +130,10 @@ An example spec class:
 Current specs must extend from BaseSpec and override the run method. Spec files are run in isolation, but because of the nesting and hierarchy, some shared state may occur depending on how you structure the file.
 	
 The main advantage of using the spec style of tests is that it produces a more readable test report, and encourages concise naming of tests around specific features.
+	
+Once you've created your test or spec, run it by executing the following command from your project root:
+
+	haxelib run hxpect 
 	
 ### Assertions
 
