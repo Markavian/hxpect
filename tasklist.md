@@ -9,6 +9,9 @@ In progress
 Completed
 ---------
 + ~~Add documentation to README.md~~ 
++ ~~Basic assertions~~
++ ~~Test Runner for junit style tests~~
++ ~~Spec Runner for spec style tests~~
 + ~~Command line runner to scan test directories for test classes~~
 
 Research
