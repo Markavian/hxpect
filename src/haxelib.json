@@ -5,9 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "releasenote":
-      "Added run command, use haxelib run hxpect from the project folder to compile any tests under the src/ directory.",
+      "Fixed working directory argument.",
   "contributors": ["Markavian"],
   "dependencies": {
   }
