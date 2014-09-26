@@ -48,22 +48,22 @@ class Runner
 			regenerateHxml = true;
 		}
 		
-		sourceFolder = Utils.shiftArg(args, "src");
-		testFolder = Utils.shiftArg(args, "src");
-		
 		workingPath = Sys.getCwd();
 		if (args.length > 0)
 		{
 			var lastArg = args.pop();
 			if (FileSystem.exists(lastArg) && FileSystem.isDirectory(lastArg))
 			{
-				workingPath = args.pop();
+				workingPath = lastArg;
 			}
 			else
 			{
 				args.push(lastArg);
 			}
 		}
+		
+		sourceFolder = Utils.shiftArg(args, "src");
+		testFolder = Utils.shiftArg(args, "src");
 	}
 	
 	function tryToCompile():Void
