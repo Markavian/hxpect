@@ -12,6 +12,9 @@ class Template
 		var registeredSpecFiles:String = "";
 		var registeredTestFiles:String = "";
 		
+		var specFiles:Int = 0;
+		var testFiles:Int = 0;
+		
 		for (file in sourceFiles)
 		{
 			if (file.indexOf("hxpect/core") != -1)
@@ -26,12 +29,14 @@ class Template
 				if (className.toLowerCase().indexOf("spec") != -1)
 				{
 					registeredSpecFiles += TAB +TAB + 'specRunner.registerSpecClass(' + className + ');' + NL;
+					specFiles++;
 					addImport = true;
 				}
 				
 				if (className.toLowerCase().indexOf("test") != -1)
 				{
 					registeredTestFiles += TAB +TAB + 'testRunner.registerTestClass(' + className + ');' + NL;
+					testFiles++;
 					addImport = true;
 				}
 				
@@ -48,6 +53,7 @@ class Template
 		
 		var template:String = 'package hxpect;
 
+import hxpect.core.Logger;
 import hxpect.core.SpecRunner;
 import hxpect.core.TestRunner;
 
@@ -57,21 +63,38 @@ class TempTestRunner
 {
 	public static function main() 
 	{
-		var testRunner = new TestRunner();
-		' + NL + registeredTestFiles + '
-		testRunner.run();
+		var logger = new Logger();
 		
-		if (!testRunner.successful())
+		var testFiles = ' + testFiles + ';
+		var specFiles = ' + specFiles + ';
+		
+		if (testFiles > 0)
 		{
-			Sys.exit(1);
+			var testRunner = new TestRunner();
+			' + NL + registeredTestFiles + '
+			testRunner.run();
+			
+			if (!testRunner.successful())
+			{
+				Sys.exit(1);
+			}
 		}
 		
-		var specRunner = new SpecRunner();
-		' + NL + registeredSpecFiles + '
-		specRunner.run();
-		
-		if (!specRunner.successful())
+		if (specFiles > 0)
 		{
+			var specRunner = new SpecRunner();
+			' + NL + registeredSpecFiles + '
+			specRunner.run();
+			
+			if (!specRunner.successful())
+			{
+				Sys.exit(1);
+			}
+		}
+		
+		if (testFiles == 0 && specFiles == 0)
+		{
+			logger.logFail("No tests or specs found.");
 			Sys.exit(1);
 		}
 		

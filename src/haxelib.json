@@ -4,8 +4,8 @@
   "license": "Public",
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
-      "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.4.1",
+      "Added checks to count number of test and spec files found, and only throw an error if neither are found.",
+  "version": "0.4.2",
   "releasenote":
       "Fixed working directory argument.",
   "contributors": ["Markavian"],
