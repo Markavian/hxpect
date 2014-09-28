@@ -5,10 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "releasenote":
-      "Added checks to count number of test and spec files found, and only throw an error if neither are found.",
+      "Compiled native openfl backends into default source path, allowing openfl libraries to be used in tests out of the box.",
   "contributors": ["Markavian"],
-  "dependencies": {
-  }
+  "dependencies": { }
 }
