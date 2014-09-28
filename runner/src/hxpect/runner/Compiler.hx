@@ -141,7 +141,7 @@ class Compiler
 	
 	function readHaxelibPathFor(libraryName:String):String
 	{
-		var commandResult = runCommand("haxelib", ["config"]);
+		var commandResult = runCommand("haxelib config");
 		
 		var haxelibPath = commandResult.result;
 		var libraryDevPath = readFileContents(haxelibPath + libraryName + "/.dev");
