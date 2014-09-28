@@ -29,8 +29,18 @@ Features
 ### Cross Platform
 
 + Hxpect should work with any haxe project
-+ Specifically hxpect works for [OpenFL projects](http://www.openfl.org). 
++ Specifically hxpect works with [OpenFL projects](http://www.openfl.org)
 + TODO: Only enable openfl support with an -openfl flag
+
+### Specs or Tests
+	
+You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style. Examples of each type are provided below in Getting Started.
+
+### Test reports
+
+The default runners produce readable test reports to help you debug. They can also be written to fail with a non-zero error code, and baked in as a pre-compile step to your projects. 
+
+Currently test reports are only logged to the command line - which should be enough to get you going, and used as a pre-build command step from Flash Develop or a CI task.
 
 ### Expectations
 
@@ -57,13 +67,6 @@ The reverse form of not works as well:
 	expect(actual).not.to.be(expected);
 	expect(actual).to.not.be(expected);
 ```	
-### Specs or Tests
-	
-You can either extend from BaseTest, and write XUnit style tests, or extend from BaseSpec, and write nested specs, depending on your familiarity with each style. Examples of each type are provided below in Getting Started.
-
-### Test reports
-
-The default runners produce readable test reports to help you debug. They can also be written to fail with a non-zero error code, and baked in as a pre-compile step to your projects. 
 
 ### Assertions
 
