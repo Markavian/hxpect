@@ -227,7 +227,7 @@ class Compiler
 		}
 		
 		// report about this action
-		logger.logInfo(sanitizedCommand + sanitizedArgs.join(" "));
+		logger.logInfo(sanitizedCommand + " " + sanitizedArgs.join(" "));
 		
 		// do the thing, record the results
 		var process = new Process(sanitizedCommand, sanitizedArgs);
@@ -237,7 +237,16 @@ class Compiler
 		process.close();
 		
 		// report about the result
-		logger.log(result);
+		if (result.length > 0)
+		{
+			logger.log(result);
+		}
+		
+		// report about any errors
+		if (error.length > 0)
+		{
+			logger.logFail(error);
+		}
 		
 		return new CommandResult(exitCode, result, error);
 	}
