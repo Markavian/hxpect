@@ -13,6 +13,7 @@ Completed
 + ~~Test Runner for junit style tests~~
 + ~~Spec Runner for spec style tests~~
 + ~~Command line runner to scan test directories for test classes~~
++ ~~OpenFL support out of the box with no special config~~
 
 Backlog
 -------
