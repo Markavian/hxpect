@@ -28,7 +28,9 @@ Features
 
 ### Cross Platform
 
-Hxpect should work with any haxe project, although specifically it was designed for [OpenFL projects](http://www.openfl.org). 
++ Hxpect should work with any haxe project
++ Specifically hxpect works for [OpenFL projects](http://www.openfl.org). 
++ TODO: Only enable openfl support with an -openfl flag
 
 ### Expectations
 
