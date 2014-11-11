@@ -13,6 +13,12 @@ Completed
 + ~~Test Runner for junit style tests~~
 + ~~Spec Runner for spec style tests~~
 + ~~Command line runner to scan test directories for test classes~~
++ ~~OpenFL support out of the box with no special config~~
+
+Backlog
+-------
++ Add an -openfl flag to prevent default inclusion of OpenFL libraries in build process
++ Look into @Test metadata instead of using test_ for test runner tests.
 
 Research
 --------
