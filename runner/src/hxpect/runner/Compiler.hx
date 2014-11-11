@@ -18,8 +18,7 @@ class Compiler
 	private var flagRegenerateHxmlFile:Bool;
 	
 	private var workingPath:String;
-	private var sourcePath:String;
-	private var testPath:String;
+	private var sourcePaths:Array<String>;
 	private var additionalArgs:Array<String>;
 	
 	private var binarySourcePath:String;
@@ -27,19 +26,28 @@ class Compiler
 	private var hxmlFilePath:String;
 	private var outputFilePath:String;
 	
-	public function setup(workingPath:String, sourceDirectory:String, testDirectory:String, additionalArgs:Array<String>):Void
+	public function setup(workingPath:String, sourceDirectories:Array<String>, additionalArgs:Array<String>):Void
 	{
 		this.flagIncludeHxpectLib = true;
 		
 		this.workingPath = workingPath;
-		this.sourcePath = workingPath + sourceDirectory;
-		this.testPath = workingPath + testDirectory;
 		this.additionalArgs = additionalArgs;
 		
 		this.binarySourcePath = workingPath + "bin/temp";
 		this.mainFilePath = binarySourcePath + "/hxpect/TempTestRunner.hx";
 		this.hxmlFilePath = binarySourcePath + "/tests.hxml";
 		this.outputFilePath = binarySourcePath + "/tests.n";
+		
+		makeSourcePaths(workingPath, sourceDirectories);
+	}
+	
+	function makeSourcePaths(workingPath:String, sourceDirectories:Array<String>):Void
+	{
+		sourcePaths = new Array<String>();
+		for (directory in sourceDirectories)
+		{
+			sourcePaths.push(workingPath + directory);
+		}
 	}
 	
 	public function excludeHxpectLib()
@@ -66,14 +74,12 @@ class Compiler
 	{
 		logger.logInfo("Working path: " + workingPath);
 		
-		if (!FileSystem.exists(sourcePath))
+		for (path in sourcePaths)
 		{
-			throw "Source path does not exist: " + sourcePath;
-		}
-		
-		if (!FileSystem.exists(testPath))
-		{
-			throw "Test path does not exist: " + testPath;
+			if (!FileSystem.exists(path))
+			{
+				throw "Source path does not exist: " + path;
+			}
 		}
 	}
 	
@@ -86,6 +92,8 @@ class Compiler
 	function createMainFile():Void
 	{
 		logger.logInfo("Generating Test Runner class: " + mainFilePath);
+		
+		var testPath = sourcePaths[0];
 		
 		var sourceFiles = listFiles(testPath);
 		var mainFileContents = Template.defineMain(testPath, sourceFiles);
@@ -116,10 +124,11 @@ class Compiler
 		
 		var openflNativeBackendsLib = "-cp " + readHaxelibPathFor("openfl") + "/backends/native";
 		
+		var sourcePathsHxml = makeSourcePathsHxml();
+		
 		var fileContents = ""
 			+ "-cp " + binarySourcePath + NL
-			+ "-cp " + sourcePath + " " + NL
-			+ "-cp " + testPath + " " + NL
+			+ sourcePathsHxml + NL 
 			+ NL
 			+ "-main hxpect.TempTestRunner " + NL
 			+ "-neko " + outputFilePath + NL
@@ -137,6 +146,20 @@ class Compiler
 		logger.logEmptyLine();
 			
 		writeStringToFile(fileContents, hxmlFilePath);
+	}
+	
+	function makeSourcePathsHxml():String
+	{
+		var NL = "\n";
+		
+		var result = "";
+		
+		for (path in sourcePaths)
+		{
+			result += "-cp " + path + " " + NL;
+		}
+		
+		return result;
 	}
 	
 	function readHaxelibPathFor(libraryName:String):String

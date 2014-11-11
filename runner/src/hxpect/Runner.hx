@@ -15,8 +15,7 @@ class Runner
 	var args:Array<String>;
 	var workingPath:String;
 	
-	var sourceFolder:String;
-	var testFolder:String;
+	var sourceFolders:Array<String>;
 	var excludeHxpectLib:Bool;
 	var regenerateHxml:Bool;
 	
@@ -62,19 +61,26 @@ class Runner
 			}
 		}
 		
-		sourceFolder = Utils.shiftArg(args, "src");
-		testFolder = Utils.shiftArg(args, "src");
+		sourceFolders = new Array<String>();
+		while (args.length > 0)
+		{
+			sourceFolders.push(args.shift());
+		}
+		
+		if (sourceFolders.length == 0)
+		{
+			sourceFolders.push("src");
+		}
 	}
 	
 	function tryToCompile():Void
 	{		
-		logger.logInfo("Source folder: " + sourceFolder);
-		logger.logInfo("Tests folder: " + testFolder);
+		logger.logInfo("Source folders: " + sourceFolders.join(", "));
 		logger.logInfo("Additional arguments: " + args.join(" "));
 		
 		try
 		{
-			compiler.setup(workingPath, sourceFolder, testFolder, args);
+			compiler.setup(workingPath, sourceFolders, args);
 			
 			if (excludeHxpectLib)
 			{

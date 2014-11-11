@@ -5,9 +5,9 @@
   "tags": ["mkv25", "haxe", "openfl", "test", "hxpect"],
   "description":
       "Haxe based test framework for writing tests in a more natural language kind of way.",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "releasenote":
-      "Added more console information about build failures.",
+      "Allowed multiple source paths to be specified on command line.",
   "contributors": ["Markavian"],
   "dependencies": { }
 }
